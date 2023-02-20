@@ -134,7 +134,16 @@ func main() {
 		go func(i int, tc *comparer.TestCase) {
 			res, err := comp.Compare(tc)
 			if err != nil {
-				log.Fatalf("Error running comparison: %v", err)
+				log.Errorf("Error running comparison: %v", err)
+				if res == nil {
+					res = &comparer.Result{
+						TestCase:          tc,
+						Diff:              "",
+						UnexpectedFailure: "error",
+						UnexpectedSuccess: false,
+						Unsupported:       false,
+					}
+				}
 			}
 			results[i] = res
 			if !res.Success() {

@@ -8,3 +8,6 @@ scrape_configs:
       - 'demo.promlabs.com:10000'
       - 'demo.promlabs.com:10001'
       - 'demo.promlabs.com:10002'
+
+remote_write:
+  - url: http://localhost:4000/v1/prometheus/write

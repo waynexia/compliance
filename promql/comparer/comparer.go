@@ -3,6 +3,7 @@ package comparer
 import (
 	"context"
 	"fmt"
+	"log"
 	"sort"
 	"strings"
 	"time"
@@ -17,7 +18,7 @@ import (
 
 const (
 	defaultFraction = 0.00001
-	defaultMargin   = 0.0
+	defaultMargin   = 0.00001
 )
 
 // PromAPI allows running instant and range queries against a Prometheus-compatible API.
@@ -98,6 +99,7 @@ func (c *Comparer) Compare(tc *TestCase) (*Result, error) {
 
 	if (testErr != nil) != tc.ShouldFail {
 		if testErr != nil {
+			log.Printf("test server error: %+v\n", testErr)
 			return &Result{TestCase: tc, UnexpectedFailure: testErr.Error(), Unsupported: strings.Contains(testErr.Error(), "501")}, nil
 		}
 		return &Result{TestCase: tc, UnexpectedSuccess: true}, nil

@@ -1,0 +1,11 @@
+reference_target_config:
+  query_url: 'http://localhost:9010'
+
+test_target_config:
+  query_url: 'http://localhost:4004'
+
+query_tweaks:
+  - note: 'GreptimeDB test'
+    align_timestamps_to_step: true
+    drop_result_labels:
+      - __name__

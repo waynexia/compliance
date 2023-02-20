@@ -13,7 +13,8 @@ import (
 
 var funcMap = map[string]interface{}{
 	"include": func(includePassing bool, result *comparer.Result) bool {
-		return includePassing || !result.Success()
+		//return includePassing || !result.Success()
+		return true
 	},
 	"numResults": func(results []*comparer.Result) int {
 		return len(results)
